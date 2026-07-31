@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -53,6 +54,8 @@ class ConsultarArchivosEntrada extends Command
                     Storage::disk('s3')->put('cobol/entrada/'. $archivo, $contenido);
 
                     Tramite::create(['tramite' => $archivo]);
+
+                    Cache::forget('archivos_salida_s3');
 
                 }
 

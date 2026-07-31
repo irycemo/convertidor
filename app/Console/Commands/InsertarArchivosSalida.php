@@ -7,6 +7,7 @@ use App\Models\Tramite;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,7 +23,17 @@ class InsertarArchivosSalida extends Command
 
             $archivos = Tramite::where('procesado', 0)->get();
 
-            $todosLosArchivos = Storage::disk('s3')->files('cobol/salida/');
+            if(Cache::get('archivos_salida_s3')){
+
+                $todosLosArchivos = Cache::get('archivos_salida_s3');
+
+            }else{
+
+                $todosLosArchivos = Storage::disk('s3')->files('cobol/salida/');
+
+                Cache::put('archivos_salida_s3', $todosLosArchivos);
+
+            }
 
             foreach ($archivos as $archivo) {
 
