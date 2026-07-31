@@ -48,7 +48,7 @@ class InsertarArchivosSalida extends Command
                         $contenido = Storage::disk('s3')->get($archivo_s3);
 
                         Salida::create([
-                            'archivo' => $nombre,
+                            'archivo' => str_replace('cobol/salida/', '', $archivo_s3),
                             'contenido' => $contenido
                         ]);
 
