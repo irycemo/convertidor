@@ -38,7 +38,7 @@ class ConsultarArchivosEntrada extends Command
 
             $archivos = collect($matches[1])
                         ->filter(function ($archivo) {
-                            return str_contains($archivo, now()->format('Ym'));
+                            return str_contains($archivo, now()->format('Ymd'));
                         })
                         ->values();
 
