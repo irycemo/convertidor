@@ -55,7 +55,7 @@ class ConsultarArchivosEntrada extends Command
 
                     Tramite::create(['tramite' => $archivo]);
 
-                    Cache::forget('archivos_salida_s3');
+                    /* Cache::forget('archivos_salida_s3'); */
 
                 }
 

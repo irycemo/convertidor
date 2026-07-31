@@ -23,7 +23,7 @@ class InsertarArchivosSalida extends Command
 
             $archivos = Tramite::where('procesado', 0)->get();
 
-            if(Cache::get('archivos_salida_s3')){
+            /* if(Cache::get('archivos_salida_s3')){
 
                 $todosLosArchivos = Cache::get('archivos_salida_s3');
 
@@ -31,9 +31,11 @@ class InsertarArchivosSalida extends Command
 
                 $todosLosArchivos = Storage::disk('s3')->files('cobol/salida/');
 
-                Cache::put('archivos_salida_s3', $todosLosArchivos);
+                Cache::put('archivos_salida_s3', 'value');
 
-            }
+            } */
+
+            $todosLosArchivos = Storage::disk('s3')->files('cobol/salida/');
 
             foreach ($archivos as $archivo) {
 
